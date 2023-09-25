@@ -8,29 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var viewModel = DogBreedsViewModel()
-    
     var body: some View {
-        ZStack {
-            switch viewModel.fetchState {
-            case .loading:
-                ProgressView("Fetching Dog Breeds...")
-            case .fetched(let breeds):
-                if breeds.isEmpty {
-                    Text("No Dog Breeds Found")
-                } else {
-                    List(breeds, id: \.id) { breed in
-                        Text(breed.name ?? "Unknown breed")
-                    }
+        TabView {
+            ListView()
+                .tabItem {
+                    Label("List", systemImage: "list.dash")
                 }
-            case .error(let error):
-                Text("Error: \(error.localizedDescription)")
-            }
-        }
-        .onAppear {
-            Task {
-                await viewModel.fetchDogBreeds()
-            }
+
+            SearchView()
+                .tabItem {
+                    Label("Search", systemImage: "rectangle.and.text.magnifyingglass")
+                }
         }
     }
 }
