@@ -26,7 +26,6 @@ class DogBreedsViewModel: ObservableObject {
         do {
             fetchState = .loading
             let breeds = try await apiService.fetchDogBreeds()
-            // TODO: Filter out breeds with no displayable name if needed
             fetchState = .fetched(breeds)
         } catch {
             fetchState = .error(error)

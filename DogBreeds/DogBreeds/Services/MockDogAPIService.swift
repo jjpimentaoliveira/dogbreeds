@@ -22,4 +22,3 @@ class MockDogAPIService: DogAPIServiceProtocol {
         return responseData
     }
 }
-
