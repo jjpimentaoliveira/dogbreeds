@@ -21,9 +21,7 @@ struct ListView: View {
                         Text("No Dog Breeds Found")
                     } else {
                         List(breeds, id: \.id) { breed in
-                            NavigationLink(destination: DetailsView(breed: breed)) {
-                                Text(breed.name ?? "Unknown breed")
-                            }
+                            Text(breed.name ?? "Unknown breed")
                         }
                     }
                 case .error(let error):
