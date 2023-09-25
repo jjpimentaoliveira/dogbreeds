@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel = DogBreedsViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List(viewModel.dogBreeds, id: \.id) { breed in
+            Text(breed.name ?? "Unknown breed")
         }
-        .padding()
+        .onAppear {
+            viewModel.fetchDogBreeds()
+        }
     }
 }
 
