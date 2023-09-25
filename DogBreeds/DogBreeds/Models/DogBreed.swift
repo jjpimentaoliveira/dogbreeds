@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DogBreed: Codable {
+struct DogBreed: Codable, Equatable {
     let id: Int
     let bredFor: String?
     let breedGroup: String?
@@ -68,7 +68,7 @@ struct DogBreed: Codable {
         self.weight = weight
     }
 
-    struct DogSize: Codable {
+    struct DogSize: Codable, Equatable {
         let imperial: String?
         let metric: String?
     }

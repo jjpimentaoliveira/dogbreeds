@@ -11,11 +11,26 @@ struct ContentView: View {
     @ObservedObject var viewModel = DogBreedsViewModel()
     
     var body: some View {
-        List(viewModel.dogBreeds, id: \.id) { breed in
-            Text(breed.name ?? "Unknown breed")
+        ZStack {
+            switch viewModel.fetchState {
+            case .loading:
+                ProgressView("Fetching Dog Breeds...")
+            case .fetched(let breeds):
+                if breeds.isEmpty {
+                    Text("No Dog Breeds Found")
+                } else {
+                    List(breeds, id: \.id) { breed in
+                        Text(breed.name ?? "Unknown breed")
+                    }
+                }
+            case .error(let error):
+                Text("Error: \(error.localizedDescription)")
+            }
         }
         .onAppear {
-            viewModel.fetchDogBreeds()
+            Task {
+                await viewModel.fetchDogBreeds()
+            }
         }
     }
 }

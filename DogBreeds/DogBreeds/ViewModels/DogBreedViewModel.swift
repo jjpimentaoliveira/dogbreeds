@@ -7,24 +7,29 @@
 
 import SwiftUI
 
+enum FetchState {
+    case loading
+    case fetched([DogBreed])
+    case error(Error)
+}
+
+@MainActor
 class DogBreedsViewModel: ObservableObject {
-    @Published var dogBreeds: [DogBreed] = []
+    @Published var fetchState: FetchState = .loading
     private let apiService: DogAPIServiceProtocol
 
     init(apiService: DogAPIServiceProtocol = DogAPIService()) {
         self.apiService = apiService
     }
 
-    func fetchDogBreeds() {
-        apiService.fetchDogBreeds { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let breeds):
-                    self?.dogBreeds = breeds
-                case .failure(let error):
-                    print("fetchDogBreeds failure: \(error)")
-                }
-            }
+    func fetchDogBreeds() async {
+        do {
+            fetchState = .loading
+            let breeds = try await apiService.fetchDogBreeds()
+            // TODO: Filter out breeds with no displayable name if needed
+            fetchState = .fetched(breeds)
+        } catch {
+            fetchState = .error(error)
         }
     }
 }

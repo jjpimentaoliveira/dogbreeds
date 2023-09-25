@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DogAPIServiceProtocol {
-    func fetchDogBreeds(completion: @escaping (Result<[DogBreed], DogAPIServiceError>) -> Void)
+    func fetchDogBreeds() async throws -> [DogBreed]
 }

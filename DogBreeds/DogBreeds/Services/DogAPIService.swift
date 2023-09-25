@@ -20,8 +20,7 @@ class DogAPIService: DogAPIServiceProtocol {
 
     private let apiKey = "live_FIpbA6C1hIBuaR24GMvc0TQ35YYCuIPD3v3T1Tnu5NWCEAwNikaWqeRinX180Zw5"
 
-    func fetchDogBreeds(completion: @escaping (Result<[DogBreed], DogAPIServiceError>) -> Void) {
-
+    func fetchDogBreeds() async throws -> [DogBreed] {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.thedogapi.com"
@@ -33,8 +32,7 @@ class DogAPIService: DogAPIServiceProtocol {
 
         // Check if URL is valid
         guard let url = components.url else {
-            completion(.failure(.invalidURL))
-            return
+            throw DogAPIServiceError.invalidURL
         }
 
         var request = URLRequest(url: url)
@@ -43,41 +41,29 @@ class DogAPIService: DogAPIServiceProtocol {
             forHTTPHeaderField: "x-api-key"
         )
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
-
-            // Check if we received a network error
-            if let error {
-                completion(.failure(.networkError(error)))
-                return
-            }
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
 
             // Check if we can successfully convert the response from URLResponse? into HTTPURLResponse
-            guard let response = response as? HTTPURLResponse else {
-                completion(.failure(.invalidResponse))
-                return
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw DogAPIServiceError.invalidResponse
             }
 
             // Check if request was successfully processed
-            guard (200...299).contains(response.statusCode) else {
-                completion(.failure(.invalidStatusCode(response.statusCode)))
-                return
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw DogAPIServiceError.invalidStatusCode(httpResponse.statusCode)
             }
 
             // Check if data was returned
-            guard let data else {
-                completion(.failure(.noDataReturned))
-                return
+            guard !data.isEmpty else {
+                throw DogAPIServiceError.noDataReturned
             }
 
-            do {
-                let decoder = JSONDecoder()
-                let breeds = try decoder.decode([DogBreed].self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(breeds))
-                }
-            } catch {
-                completion(.failure(.decodingError(error)))
-            }
-        }.resume()
+            let breeds = try JSONDecoder().decode([DogBreed].self, from: data)
+
+            return breeds
+        } catch {
+            throw DogAPIServiceError.decodingError(error)
+        }
     }
 }

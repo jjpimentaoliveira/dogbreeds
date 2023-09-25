@@ -8,12 +8,18 @@
 import Foundation
 
 class MockDogAPIService: DogAPIServiceProtocol {
-    func fetchDogBreeds(completion: @escaping (Result<[DogBreed], DogAPIServiceError>) -> Void) {
-        let mockData: [DogBreed] = [
-            DogBreed(id: 1, name: "Husky"),
-            DogBreed(id: 2, name: "Chihuahua")
-        ]
-        completion(.success(mockData))
+    var responseData: [DogBreed] = []
+    var errorResponse: DogAPIServiceError? = nil
+    var didCallFetchDogsBreeds = false
+
+    func fetchDogBreeds() async throws -> [DogBreed] {
+        didCallFetchDogsBreeds = true
+
+        if let errorResponse {
+            throw errorResponse
+        }
+
+        return responseData
     }
 }
 
