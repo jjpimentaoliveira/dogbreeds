@@ -40,18 +40,18 @@ struct DogBreed: Codable {
 
     init(
         id: Int,
-        bredFor: String?,
-        breedGroup: String?,
-        countryCode: String?,
-        description: String?,
-        height: DogSize?,
-        history: String?,
-        lifeSpan: String?,
-        name: String?,
-        origin: String?,
-        referenceImageID: String?,
-        temperament: String?,
-        weight: DogSize?
+        bredFor: String? = nil,
+        breedGroup: String? = nil,
+        countryCode: String? = nil,
+        description: String? = nil,
+        height: DogSize? = nil,
+        history: String? = nil,
+        lifeSpan: String? = nil,
+        name: String? = nil,
+        origin: String? = nil,
+        referenceImageID: String? = nil,
+        temperament: String? = nil,
+        weight: DogSize? = nil
     ) {
         self.id = id
         self.bredFor = bredFor

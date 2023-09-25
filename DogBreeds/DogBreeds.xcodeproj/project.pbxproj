@@ -17,6 +17,7 @@
 		CA237E802AC07AC100BF5D16 /* DogBreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E7F2AC07AC100BF5D16 /* DogBreed.swift */; };
 		CA237E832AC07AE100BF5D16 /* DogAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E822AC07AE100BF5D16 /* DogAPIService.swift */; };
 		CA237E862AC07BA400BF5D16 /* DogBreedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E852AC07BA400BF5D16 /* DogBreedViewModel.swift */; };
+		CA237E882AC085FA00BF5D16 /* MockDogAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E872AC085FA00BF5D16 /* MockDogAPIService.swift */; };
 		CA237E8A2AC0860700BF5D16 /* DogAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E892AC0860700BF5D16 /* DogAPIServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		CA237E7F2AC07AC100BF5D16 /* DogBreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreed.swift; sourceTree = "<group>"; };
 		CA237E822AC07AE100BF5D16 /* DogAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPIService.swift; sourceTree = "<group>"; };
 		CA237E852AC07BA400BF5D16 /* DogBreedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedViewModel.swift; sourceTree = "<group>"; };
+		CA237E872AC085FA00BF5D16 /* MockDogAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDogAPIService.swift; sourceTree = "<group>"; };
 		CA237E892AC0860700BF5D16 /* DogAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPIServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +153,7 @@
 			children = (
 				CA237E892AC0860700BF5D16 /* DogAPIServiceProtocol.swift */,
 				CA237E822AC07AE100BF5D16 /* DogAPIService.swift */,
+				CA237E872AC085FA00BF5D16 /* MockDogAPIService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA237E882AC085FA00BF5D16 /* MockDogAPIService.swift in Sources */,
 				CA237E8A2AC0860700BF5D16 /* DogAPIServiceProtocol.swift in Sources */,
 				CA237E862AC07BA400BF5D16 /* DogBreedViewModel.swift in Sources */,
 				CA237E802AC07AC100BF5D16 /* DogBreed.swift in Sources */,
