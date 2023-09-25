@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel = DogBreedsViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            switch viewModel.fetchState {
+            case .loading:
+                ProgressView("Fetching Dog Breeds...")
+            case .fetched(let breeds):
+                if breeds.isEmpty {
+                    Text("No Dog Breeds Found")
+                } else {
+                    List(breeds, id: \.id) { breed in
+                        Text(breed.name ?? "Unknown breed")
+                    }
+                }
+            case .error(let error):
+                Text("Error: \(error.localizedDescription)")
+            }
         }
-        .padding()
+        .onAppear {
+            Task {
+                await viewModel.fetchDogBreeds()
+            }
+        }
     }
 }
 
