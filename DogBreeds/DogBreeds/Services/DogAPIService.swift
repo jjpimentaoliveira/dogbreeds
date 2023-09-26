@@ -17,10 +17,7 @@ enum DogAPIServiceError: Error {
 }
 
 class DogAPIService: DogAPIServiceProtocol {
-
-    private let apiKey = "live_FIpbA6C1hIBuaR24GMvc0TQ35YYCuIPD3v3T1Tnu5NWCEAwNikaWqeRinX180Zw5"
-    private let baseURL = URL(string: "https://api.thedogapi.com")
-
+    
     private func makeRequest<T: Decodable>(
         endpoint: String,
         parameters: [URLQueryItem] = [],
