@@ -9,4 +9,5 @@ import Foundation
 
 protocol DogAPIServiceProtocol {
     func fetchDogBreeds() async throws -> [DogBreed]
+    func fetchBreedImage(for imageID: String) async throws -> URL
 }
