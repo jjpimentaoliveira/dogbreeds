@@ -27,6 +27,7 @@
 		CA237E992AC350A400BF5D16 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E982AC350A400BF5D16 /* MainView.swift */; };
 		CA237E9B2AC3517100BF5D16 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E9A2AC3517100BF5D16 /* GridView.swift */; };
 		CA237E9D2AC351CC00BF5D16 /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E9C2AC351CC00BF5D16 /* GridViewCell.swift */; };
+		CA237E9F2AC3923200BF5D16 /* PlaceholderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E9E2AC3923200BF5D16 /* PlaceholderImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		CA237E982AC350A400BF5D16 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CA237E9A2AC3517100BF5D16 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		CA237E9C2AC351CC00BF5D16 /* GridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewCell.swift; sourceTree = "<group>"; };
+		CA237E9E2AC3923200BF5D16 /* PlaceholderImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 				CA237E8E2AC2396F00BF5D16 /* SearchView.swift */,
 				CA237E942AC2FB0600BF5D16 /* ListViewCell.swift */,
 				CA237E962AC340C400BF5D16 /* DisplayModeButton.swift */,
+				CA237E9E2AC3923200BF5D16 /* PlaceholderImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				CA237E8F2AC2396F00BF5D16 /* SearchView.swift in Sources */,
 				CA237E932AC2E70F00BF5D16 /* BreedImage.swift in Sources */,
 				CA237E882AC085FA00BF5D16 /* MockDogAPIService.swift in Sources */,
+				CA237E9F2AC3923200BF5D16 /* PlaceholderImageView.swift in Sources */,
 				CA237E8A2AC0860700BF5D16 /* DogAPIServiceProtocol.swift in Sources */,
 				CA237E862AC07BA400BF5D16 /* DogBreedViewModel.swift in Sources */,
 				CA237E802AC07AC100BF5D16 /* DogBreed.swift in Sources */,

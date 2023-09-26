@@ -17,24 +17,26 @@ struct GridViewCell: View {
 
     var body: some View {
         VStack {
-            AsyncImage(url: breed.imageURL) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: ImageSize.width, height: ImageSize.height)
-                case .failure:
-                    Image(systemName: "photo.fill")
-                        .frame(width: ImageSize.width, height: ImageSize.height)
-                @unknown default:
-                    Image(systemName: "photo.fill")
-                        .frame(width: ImageSize.width, height: ImageSize.height)
+            if let imageURL = breed.imageURL {
+                AsyncImage(url: imageURL) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    case .failure:
+                        PlaceholderImageView()
+                    @unknown default:
+                        PlaceholderImageView()
+                    }
                 }
+                .frame(width: ImageSize.width, height: ImageSize.height)
+            } else {
+                PlaceholderImageView()
+                    .frame(width: ImageSize.width, height: ImageSize.height)
             }
-            .frame(width: ImageSize.width, height: ImageSize.height)
 
             Text(breed.name ?? "Unknown Breed")
                 .font(.caption)

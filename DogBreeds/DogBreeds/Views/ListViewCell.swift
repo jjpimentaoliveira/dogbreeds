@@ -14,7 +14,6 @@ private struct ImageSize {
 
 struct ListViewCell: View {
     let breed: DogBreed
-    let defaultImage = Image(systemName: "photo.fill")
     var body: some View {
         HStack {
             if let imageURL = breed.imageURL {
@@ -27,24 +26,20 @@ struct ListViewCell: View {
                             .resizable()
                             .scaledToFit()
                     case .failure:
-                        defaultImage
+                        PlaceholderImageView()
                     @unknown default:
-                        defaultImage
+                        PlaceholderImageView()
                     }
                 }
-                .frame(
-                    width: ImageSize.width,
-                    height: ImageSize.height
-                )
+                .frame(width: ImageSize.width, height: ImageSize.height)
             } else {
-                defaultImage
-                    .frame(
-                        width: ImageSize.width,
-                        height: ImageSize.height
-                    )
+                PlaceholderImageView()
+                    .frame(width: ImageSize.width, height: ImageSize.height)
             }
 
             Text(breed.name ?? "Unknown breed")
+                .font(.caption)
+                .multilineTextAlignment(.center)
         }
     }
 }
