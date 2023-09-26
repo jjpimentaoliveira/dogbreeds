@@ -8,36 +8,14 @@
 import SwiftUI
 
 struct ListView: View {
-    @ObservedObject var viewModel = DogBreedsViewModel()
-    
+    let breeds: [DogBreed]
     var body: some View {
-        NavigationView {
-            ZStack {
-                switch viewModel.fetchState {
-                case .loading:
-                    ProgressView("Fetching Dog Breeds...")
-                case .fetched(let breeds):
-                    if breeds.isEmpty {
-                        Text("No Dog Breeds Found")
-                    } else {
-                        List(breeds, id: \.id) { breed in
-                            BreedListViewCell(breed: breed)
-                        }
-                    }
-                case .error(let error):
-                    Text("Error: \(error.localizedDescription)")
-                }
-            }
-            .onAppear {
-                Task {
-                    await viewModel.fetchDogBreeds()
-                }
-            }
-            .navigationBarTitle("Dog Breed", displayMode: .large)
+        List(breeds, id: \.id) { breed in
+            ListViewCell(breed: breed)
         }
     }
 }
 
 #Preview {
-    ListView()
+    ListView(breeds: [])
 }
