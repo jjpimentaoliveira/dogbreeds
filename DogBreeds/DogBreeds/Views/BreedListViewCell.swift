@@ -7,12 +7,48 @@
 
 import SwiftUI
 
+private struct ImageSize {
+    static let width: CGFloat = 70
+    static let height: CGFloat = 70
+}
+
 struct BreedListViewCell: View {
+    let breed: DogBreed
+    let defaultImage = Image(systemName: "photo.fill")
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            if let imageURL = breed.imageURL {
+                AsyncImage(url: imageURL) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    case .failure:
+                        defaultImage
+                    @unknown default:
+                        defaultImage
+                    }
+                }
+                .frame(
+                    width: ImageSize.width,
+                    height: ImageSize.height
+                )
+            } else {
+                defaultImage
+                    .frame(
+                        width: ImageSize.width,
+                        height: ImageSize.height
+                    )
+            }
+
+            Text(breed.name ?? "Unknown breed")
+        }
     }
 }
 
 #Preview {
-    BreedListViewCell()
+    BreedListViewCell(breed: DogBreed(id: 1))
 }

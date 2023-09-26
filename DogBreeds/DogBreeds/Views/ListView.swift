@@ -21,7 +21,7 @@ struct ListView: View {
                         Text("No Dog Breeds Found")
                     } else {
                         List(breeds, id: \.id) { breed in
-                            Text(breed.name ?? "Unknown breed")
+                            BreedListViewCell(breed: breed)
                         }
                     }
                 case .error(let error):
