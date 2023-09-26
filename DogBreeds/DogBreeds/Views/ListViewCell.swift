@@ -12,7 +12,7 @@ private struct ImageSize {
     static let height: CGFloat = 70
 }
 
-struct BreedListViewCell: View {
+struct ListViewCell: View {
     let breed: DogBreed
     let defaultImage = Image(systemName: "photo.fill")
     var body: some View {
@@ -50,5 +50,5 @@ struct BreedListViewCell: View {
 }
 
 #Preview {
-    BreedListViewCell(breed: DogBreed(id: 1))
+    ListViewCell(breed: DogBreed(id: 1))
 }
