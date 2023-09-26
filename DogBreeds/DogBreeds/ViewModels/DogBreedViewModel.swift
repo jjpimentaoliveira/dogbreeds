@@ -46,13 +46,11 @@ class DogBreedsViewModel: ObservableObject {
                             return updatedBreed
                         } catch {
                             print("Error: \(error.localizedDescription) while fetching breed: \(breed.id) imageURL")
-                            // Return the original breed
                             return breed
                         }
                     }
                 } else {
                     group.addTask {
-                        // No image ID, return the original breed
                         return breed
                     }
                 }
