@@ -15,6 +15,7 @@ struct DogBreed: Codable, Equatable {
     let description: String?
     let height: DogSize?
     let history: String?
+    var imageURL: URL?
     let lifeSpan: String?
     let name: String?
     let origin: String?
@@ -46,6 +47,7 @@ struct DogBreed: Codable, Equatable {
         description: String? = nil,
         height: DogSize? = nil,
         history: String? = nil,
+        imageURL: URL? = nil,
         lifeSpan: String? = nil,
         name: String? = nil,
         origin: String? = nil,
@@ -60,6 +62,7 @@ struct DogBreed: Codable, Equatable {
         self.description = description
         self.height = height
         self.history = history
+        self.imageURL = imageURL
         self.lifeSpan = lifeSpan
         self.name = name
         self.origin = origin
@@ -71,5 +74,29 @@ struct DogBreed: Codable, Equatable {
     struct DogSize: Codable, Equatable {
         let imperial: String?
         let metric: String?
+    }
+}
+
+extension DogBreed {
+    init(
+        existingBreed: DogBreed,
+        imageURL: URL?
+    ) {
+        self.init(
+            id: existingBreed.id,
+            bredFor: existingBreed.bredFor,
+            breedGroup: existingBreed.breedGroup,
+            countryCode: existingBreed.countryCode,
+            description: existingBreed.description,
+            height: existingBreed.height,
+            history: existingBreed.history,
+            imageURL: imageURL,
+            lifeSpan: existingBreed.lifeSpan,
+            name: existingBreed.name,
+            origin: existingBreed.origin,
+            referenceImageID: existingBreed.referenceImageID,
+            temperament: existingBreed.temperament,
+            weight: existingBreed.weight
+        )
     }
 }
