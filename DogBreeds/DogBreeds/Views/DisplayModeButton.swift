@@ -34,9 +34,8 @@ struct DisplayModeButton: View {
             }
         }) {
             Image(systemName: currentMode.icon)
-                .padding()
                 .foregroundColor(.black)
-                .cornerRadius(10)
+                .padding()
         }
     }
 }
