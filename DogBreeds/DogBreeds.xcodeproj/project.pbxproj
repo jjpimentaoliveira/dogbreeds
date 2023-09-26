@@ -24,6 +24,8 @@
 		CA237E932AC2E70F00BF5D16 /* BreedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E922AC2E70F00BF5D16 /* BreedImage.swift */; };
 		CA237E952AC2FB0600BF5D16 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E942AC2FB0600BF5D16 /* ListViewCell.swift */; };
 		CA237E972AC340C400BF5D16 /* DisplayModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E962AC340C400BF5D16 /* DisplayModeButton.swift */; };
+		CA237E9B2AC3517100BF5D16 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E9A2AC3517100BF5D16 /* GridView.swift */; };
+		CA237E9D2AC351CC00BF5D16 /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E9C2AC351CC00BF5D16 /* GridViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		CA237E922AC2E70F00BF5D16 /* BreedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedImage.swift; sourceTree = "<group>"; };
 		CA237E942AC2FB0600BF5D16 /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		CA237E962AC340C400BF5D16 /* DisplayModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayModeButton.swift; sourceTree = "<group>"; };
+		CA237E9A2AC3517100BF5D16 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		CA237E9C2AC351CC00BF5D16 /* GridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				CA237E8C2AC2396600BF5D16 /* ListView.swift */,
+				CA237E9A2AC3517100BF5D16 /* GridView.swift */,
+				CA237E9C2AC351CC00BF5D16 /* GridViewCell.swift */,
 				CA237E8E2AC2396F00BF5D16 /* SearchView.swift */,
 				CA237E942AC2FB0600BF5D16 /* ListViewCell.swift */,
 				CA237E962AC340C400BF5D16 /* DisplayModeButton.swift */,
@@ -327,7 +333,9 @@
 				CA237E8A2AC0860700BF5D16 /* DogAPIServiceProtocol.swift in Sources */,
 				CA237E862AC07BA400BF5D16 /* DogBreedViewModel.swift in Sources */,
 				CA237E802AC07AC100BF5D16 /* DogBreed.swift in Sources */,
+				CA237E9D2AC351CC00BF5D16 /* GridViewCell.swift in Sources */,
 				CA237E572AC077B100BF5D16 /* ContentView.swift in Sources */,
+				CA237E9B2AC3517100BF5D16 /* GridView.swift in Sources */,
 				CA237E832AC07AE100BF5D16 /* DogAPIService.swift in Sources */,
 				CA237E552AC077B100BF5D16 /* DogBreedsApp.swift in Sources */,
 				CA237E952AC2FB0600BF5D16 /* ListViewCell.swift in Sources */,
