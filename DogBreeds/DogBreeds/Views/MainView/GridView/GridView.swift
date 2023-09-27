@@ -18,7 +18,9 @@ struct GridView: View {
                 spacing: 16
             ) {
                 ForEach(breeds, id: \.id) { breed in
-                    GridViewCell(breed: breed)
+                    NavigationLink(destination: DetailsView(breed: breed)) {
+                        GridViewCell(breed: breed)
+                    }
                 }
             }
             .padding()
