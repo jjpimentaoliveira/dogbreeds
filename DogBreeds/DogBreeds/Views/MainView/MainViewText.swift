@@ -14,6 +14,7 @@ struct MainViewText: View {
         Text(breed.name ?? "Unknown breed")
             .font(.caption)
             .multilineTextAlignment(.center)
+            .foregroundStyle(.black)
     }
 }
 
