@@ -11,7 +11,9 @@ struct ListView: View {
     let breeds: [DogBreed]
     var body: some View {
         List(breeds, id: \.id) { breed in
-            ListViewCell(breed: breed)
+            NavigationLink(destination: DetailsView(breed: breed)) {
+                ListViewCell(breed: breed)
+            }
         }
     }
 }

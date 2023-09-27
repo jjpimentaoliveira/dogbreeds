@@ -30,6 +30,8 @@
 		CA237E9F2AC3923200BF5D16 /* PlaceholderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E9E2AC3923200BF5D16 /* PlaceholderImageView.swift */; };
 		CA237EA12AC39F3F00BF5D16 /* MainViewImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237EA02AC39F3F00BF5D16 /* MainViewImageView.swift */; };
 		CA237EA32AC39FA600BF5D16 /* MainViewText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237EA22AC39FA600BF5D16 /* MainViewText.swift */; };
+		CA7493582AC3A497007F7485 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7493572AC3A497007F7485 /* DetailsView.swift */; };
+		CA74935A2AC3ACA3007F7485 /* DetailsTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7493592AC3ACA3007F7485 /* DetailsTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,8 @@
 		CA237E9E2AC3923200BF5D16 /* PlaceholderImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderImageView.swift; sourceTree = "<group>"; };
 		CA237EA02AC39F3F00BF5D16 /* MainViewImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewImageView.swift; sourceTree = "<group>"; };
 		CA237EA22AC39FA600BF5D16 /* MainViewText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewText.swift; sourceTree = "<group>"; };
+		CA7493572AC3A497007F7485 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		CA7493592AC3ACA3007F7485 /* DetailsTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,18 +197,60 @@
 		CA237E8B2AC2393600BF5D16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CA7493562AC3A484007F7485 /* DetailsView */,
+				CA7493522AC3A3FE007F7485 /* MainView */,
+				CA7493552AC3A43B007F7485 /* SearchView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CA7493522AC3A3FE007F7485 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				CA7493542AC3A42A007F7485 /* GridView */,
+				CA7493532AC3A413007F7485 /* ListView */,
 				CA237E982AC350A400BF5D16 /* MainView.swift */,
 				CA237EA02AC39F3F00BF5D16 /* MainViewImageView.swift */,
 				CA237E9E2AC3923200BF5D16 /* PlaceholderImageView.swift */,
 				CA237EA22AC39FA600BF5D16 /* MainViewText.swift */,
-				CA237E8C2AC2396600BF5D16 /* ListView.swift */,
-				CA237E942AC2FB0600BF5D16 /* ListViewCell.swift */,
-				CA237E9A2AC3517100BF5D16 /* GridView.swift */,
-				CA237E9C2AC351CC00BF5D16 /* GridViewCell.swift */,
 				CA237E962AC340C400BF5D16 /* DisplayModeButton.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		CA7493532AC3A413007F7485 /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				CA237E942AC2FB0600BF5D16 /* ListViewCell.swift */,
+				CA237E8C2AC2396600BF5D16 /* ListView.swift */,
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
+		CA7493542AC3A42A007F7485 /* GridView */ = {
+			isa = PBXGroup;
+			children = (
+				CA237E9C2AC351CC00BF5D16 /* GridViewCell.swift */,
+				CA237E9A2AC3517100BF5D16 /* GridView.swift */,
+			);
+			path = GridView;
+			sourceTree = "<group>";
+		};
+		CA7493552AC3A43B007F7485 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
 				CA237E8E2AC2396F00BF5D16 /* SearchView.swift */,
 			);
-			path = Views;
+			path = SearchView;
+			sourceTree = "<group>";
+		};
+		CA7493562AC3A484007F7485 /* DetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				CA7493572AC3A497007F7485 /* DetailsView.swift */,
+				CA7493592AC3ACA3007F7485 /* DetailsTextView.swift */,
+			);
+			path = DetailsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,7 +384,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA237E8D2AC2396600BF5D16 /* ListView.swift in Sources */,
+				CA7493582AC3A497007F7485 /* DetailsView.swift in Sources */,
 				CA237E992AC350A400BF5D16 /* MainView.swift in Sources */,
+				CA74935A2AC3ACA3007F7485 /* DetailsTextView.swift in Sources */,
 				CA237E972AC340C400BF5D16 /* DisplayModeButton.swift in Sources */,
 				CA237E8F2AC2396F00BF5D16 /* SearchView.swift in Sources */,
 				CA237E932AC2E70F00BF5D16 /* BreedImage.swift in Sources */,
