@@ -8,11 +8,33 @@
 import SwiftUI
 
 struct DetailsView: View {
+    let breed: DogBreed
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        DetailsTextView(title: "Temperament:", value: breed.temperament)
+                        DetailsTextView(title: "Height:", value: breed.height?.metric, unit: "kg")
+                        DetailsTextView(title: "Weight:", value: breed.weight?.metric, unit: "cm")
+                        DetailsTextView(title: "Origin:", value: breed.origin)
+                        DetailsTextView(title: "Bred For:", value: breed.bredFor)
+                        DetailsTextView(title: "Breed Group:", value: breed.breedGroup)
+                        DetailsTextView(title: "Life Span:", value: breed.lifeSpan)
+                        DetailsTextView(title: "Country Code:", value: breed.countryCode)
+                        DetailsTextView(title: "History:", value: breed.history)
+                        DetailsTextView(title: "Description:", value: breed.description)
+                    }
+                    .frame(width: geometry.size.width)
+                }
+                .padding()
+            }
+            .navigationBarTitle(breed.name ?? "Unknown breed", displayMode: .inline)
+        }
     }
 }
 
 #Preview {
-    DetailsView()
+    DetailsView(breed: DogBreed(id: 1))
 }
