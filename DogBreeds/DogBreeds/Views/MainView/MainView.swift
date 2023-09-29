@@ -10,6 +10,8 @@ import SwiftUI
 struct MainView: View {
     @State private var displayMode: DisplayMode = .list
     @ObservedObject var viewModel = DogBreedsViewModel()
+    @ObservedObject var sortOrderViewModel = SortOrderViewModel()
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -40,6 +42,10 @@ struct MainView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     DisplayModeButton(currentMode: $displayMode)
+                }
+
+                ToolbarItem(placement: .topBarLeading) {
+                    SortOrderButton(sortOrderViewModel: sortOrderViewModel, viewModel: viewModel)
                 }
             }
         }
