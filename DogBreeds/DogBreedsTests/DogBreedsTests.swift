@@ -33,7 +33,7 @@ final class DogBreedsTests: XCTestCase {
         mockService.responseData = responseData
 
         Task {
-            await viewModel?.fetchDogBreeds()
+            await viewModel?.fetchDogBreeds(with: .ascending)
 
             XCTAssertTrue(mockService.didCallFetchDogsBreeds)
 
@@ -50,7 +50,7 @@ final class DogBreedsTests: XCTestCase {
         service.responseData = [DogBreed(id: 1, name: "Husky")]
 
         do {
-            let breeds = try await service.fetchDogBreeds()
+            let breeds = try await service.fetchDogBreeds(with: .ascending)
             XCTAssertEqual(breeds.count, 1)
             XCTAssertEqual(breeds[0].id, 1)
             XCTAssertEqual(breeds[0].name, "Husky")
@@ -64,7 +64,7 @@ final class DogBreedsTests: XCTestCase {
         mockService.errorResponse = .invalidResponse
 
         Task {
-            await viewModel?.fetchDogBreeds()
+            await viewModel?.fetchDogBreeds(with: .ascending)
 
             XCTAssertTrue(mockService.didCallFetchDogsBreeds)
 

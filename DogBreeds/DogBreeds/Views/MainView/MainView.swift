@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject var viewModel = DogBreedsViewModel()
     @State private var displayMode: DisplayMode = .list
+    @ObservedObject var viewModel = DogBreedsViewModel()
     var body: some View {
         NavigationView {
             ZStack {
@@ -33,7 +33,7 @@ struct MainView: View {
             }
             .onAppear {
                 Task {
-                    await viewModel.fetchDogBreeds()
+                    await viewModel.fetchDogBreeds(with: sortOrderViewModel.sortOrder)
                 }
             }
             .navigationBarTitle("Dog Breeds", displayMode: .inline)

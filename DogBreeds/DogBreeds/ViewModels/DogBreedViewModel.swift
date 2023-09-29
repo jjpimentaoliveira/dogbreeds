@@ -16,26 +16,26 @@ enum FetchState {
 @MainActor
 class DogBreedsViewModel: ObservableObject {
     @Published var fetchState: FetchState = .loading
+    var sortedBreeds: [DogBreed] = []
     private let apiService: DogAPIServiceProtocol
 
     init(apiService: DogAPIServiceProtocol = DogAPIService()) {
         self.apiService = apiService
     }
 
-    func fetchDogBreeds() async {
+    func fetchDogBreeds(with order: SortOrder) async {
         do {
             fetchState = .loading
-            var breeds = try await apiService.fetchDogBreeds()
-
-            try await fetchImageUrls(for: &breeds)
-
-            fetchState = .fetched(breeds)
+            let breeds = try await apiService.fetchDogBreeds(with: order)
+            let updatedBreeds = try await updateImageURLs(forBreeds: breeds)
+            sortedBreeds = sortBreeds(updatedBreeds, sortOrder: order)
+            fetchState = .fetched(sortedBreeds)
         } catch {
             fetchState = .error(error)
         }
     }
 
-    private func fetchImageUrls(for breeds: inout [DogBreed]) async throws {
+    private func updateImageURLs(forBreeds breeds: [DogBreed]) async throws -> [DogBreed] {
         try await withThrowingTaskGroup(of: DogBreed.self) { group in
             for breed in breeds {
                 if let imageID = breed.referenceImageID {
@@ -61,7 +61,32 @@ class DogBreedsViewModel: ObservableObject {
                 updatedBreeds.append(breed)
             }
 
-            breeds = updatedBreeds
+            return updatedBreeds
+        }
+    }
+
+    func clearAndFetchBreeds(with order: SortOrder) async {
+        Task {
+            await clearBreeds()
+            await fetchDogBreeds(with: order)
+        }
+    }
+
+    private func clearBreeds() async {
+        sortedBreeds.removeAll()
+    }
+
+    func sortBreeds(
+        _ breeds: [DogBreed],
+        sortOrder: SortOrder
+    ) -> [DogBreed] {
+        return breeds.sorted {
+            switch sortOrder {
+            case .ascending:
+                return $0.name?.caseInsensitiveCompare($1.name ?? "") == .orderedAscending
+            case .descending:
+                return $0.name?.caseInsensitiveCompare($1.name ?? "") == .orderedDescending
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ protocol DogAPIServiceProtocol {
     var apiKey: String { get }
     var baseURL: URL? { get }
 
-    func fetchDogBreeds() async throws -> [DogBreed]
+    func fetchDogBreeds(with order: SortOrder) async throws -> [DogBreed]
     func fetchBreedImage(for imageID: String) async throws -> URL
 }
 
