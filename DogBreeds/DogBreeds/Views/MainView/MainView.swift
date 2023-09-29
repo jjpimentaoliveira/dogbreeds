@@ -35,7 +35,9 @@ struct MainView: View {
             }
             .onAppear {
                 Task {
-                    await mainViewViewModel.fetchDogBreeds(with: sortOrderViewModel.sortOrder)
+                    if mainViewViewModel.sortedBreeds.isEmpty {
+                        await mainViewViewModel.fetchInitialDogBreeds(with: sortOrderViewModel.sortOrder)
+                    }
                 }
             }
             .navigationBarTitle("Dog Breeds", displayMode: .inline)

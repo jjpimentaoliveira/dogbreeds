@@ -17,7 +17,7 @@ class MainViewViewModel: ObservableObject {
         self.apiService = apiService
     }
 
-    func fetchDogBreeds(with order: SortOrder) async {
+    func fetchInitialDogBreeds(with order: SortOrder) async {
         do {
             fetchState = .loading
             let breeds = try await apiService.fetchDogBreeds(with: order)
@@ -62,7 +62,7 @@ class MainViewViewModel: ObservableObject {
     func clearAndFetchBreeds(with order: SortOrder) async {
         Task {
             await clearBreeds()
-            await fetchDogBreeds(with: order)
+            await fetchInitialDogBreeds(with: order)
         }
     }
 
@@ -72,10 +72,10 @@ class MainViewViewModel: ObservableObject {
 
     func sortBreeds(
         _ breeds: [DogBreed],
-        sortOrder: SortOrder
+        order: SortOrder
     ) -> [DogBreed] {
         return breeds.sorted {
-            switch sortOrder {
+            switch order {
             case .ascending:
                 return $0.name?.caseInsensitiveCompare($1.name ?? "") == .orderedAscending
             case .descending:
