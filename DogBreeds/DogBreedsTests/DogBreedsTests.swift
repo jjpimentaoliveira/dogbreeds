@@ -9,11 +9,11 @@ import XCTest
 @testable import DogBreeds
 
 final class DogBreedsTests: XCTestCase {
-    var viewModel: DogBreedsViewModel?
+    var viewModel: MainViewViewModel?
 
     @MainActor override func setUp() {
         super.setUp()
-        viewModel = DogBreedsViewModel(apiService: MockDogAPIService())
+        viewModel = MainViewViewModel(apiService: MockDogAPIService())
     }
 
     override func tearDown() {
@@ -33,7 +33,7 @@ final class DogBreedsTests: XCTestCase {
         mockService.responseData = responseData
 
         Task {
-            await viewModel?.fetchDogBreeds()
+            await viewModel?.fetchDogBreeds(with: .ascending)
 
             XCTAssertTrue(mockService.didCallFetchDogsBreeds)
 
@@ -50,7 +50,7 @@ final class DogBreedsTests: XCTestCase {
         service.responseData = [DogBreed(id: 1, name: "Husky")]
 
         do {
-            let breeds = try await service.fetchDogBreeds()
+            let breeds = try await service.fetchDogBreeds(with: .ascending)
             XCTAssertEqual(breeds.count, 1)
             XCTAssertEqual(breeds[0].id, 1)
             XCTAssertEqual(breeds[0].name, "Husky")
@@ -64,7 +64,7 @@ final class DogBreedsTests: XCTestCase {
         mockService.errorResponse = .invalidResponse
 
         Task {
-            await viewModel?.fetchDogBreeds()
+            await viewModel?.fetchDogBreeds(with: .ascending)
 
             XCTAssertTrue(mockService.didCallFetchDogsBreeds)
 
@@ -105,5 +105,31 @@ final class DogBreedsTests: XCTestCase {
                 DogAPIServiceError.invalidResponse.localizedDescription
             )
         }
+    }
+
+    @MainActor func testAscendingSort() {
+        let unsortedBreeds = [
+            DogBreed(id: 1, name: "Golden Retriever"),
+            DogBreed(id: 2, name: "Dachshund"),
+            DogBreed(id: 3, name: "Beagle"),
+            DogBreed(id: 4, name: "Husky"),
+            DogBreed(id: 5, name: "Chihuahua")
+        ]
+
+        let sortedBreeds = viewModel?.sortBreeds(unsortedBreeds, sortOrder: .ascending)
+        XCTAssertEqual(sortedBreeds?.map { $0.name }, ["Beagle", "Chihuahua", "Dachshund", "Golden Retriever", "Husky"])
+    }
+
+    @MainActor func testDescendingSort() {
+        let unsortedBreeds = [
+            DogBreed(id: 1, name: "Golden Retriever"),
+            DogBreed(id: 2, name: "Dachshund"),
+            DogBreed(id: 3, name: "Beagle"),
+            DogBreed(id: 4, name: "Husky"),
+            DogBreed(id: 5, name: "Chihuahua")
+        ]
+
+        let sortedBreeds = viewModel?.sortBreeds(unsortedBreeds, sortOrder: .descending)
+        XCTAssertEqual(sortedBreeds?.map { $0.name }, ["Husky", "Golden Retriever", "Dachshund", "Chihuahua", "Beagle"])
     }
 }

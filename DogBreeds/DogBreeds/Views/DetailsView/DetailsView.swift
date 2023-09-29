@@ -28,6 +28,7 @@ struct DetailsView: View {
                     }
                     .frame(width: geometry.size.width)
                 }
+                .scrollIndicators(.never)
                 .padding()
             }
             .navigationBarTitle(breed.name ?? "Unknown breed", displayMode: .inline)
