@@ -24,9 +24,17 @@ struct MainView: View {
                     } else {
                         switch displayMode {
                         case .list:
-                            ListView(breeds: breeds)
+                            ListView(
+                                mainViewViewModel: mainViewViewModel,
+                                sortOrderViewModel: sortOrderViewModel,
+                                breeds: breeds
+                            )
                         case .grid:
-                            GridView(breeds: breeds)
+                            GridView(
+                                mainViewViewModel: mainViewViewModel,
+                                sortOrderViewModel: sortOrderViewModel,
+                                breeds: breeds
+                            )
                         }
                     }
                 case .error(let error):
