@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-enum FetchState {
-    case loading
-    case fetched([DogBreed])
-    case error(Error)
-}
-
 @MainActor
 class MainViewViewModel: ObservableObject {
     @Published var fetchState: FetchState = .loading
