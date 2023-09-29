@@ -13,7 +13,10 @@ class MockDogAPIService: DogAPIServiceProtocol {
     var didCallFetchDogsBreeds = false
     var didCallFetchBreedImage = false
 
-    func fetchDogBreeds(with order: SortOrder) async throws -> [DogBreed] {
+    func fetchDogBreeds(
+        with order: SortOrder,
+        page: Int
+    ) async throws -> [DogBreed] {
         didCallFetchDogsBreeds = true
 
         if let errorResponse {

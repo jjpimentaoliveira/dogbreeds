@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct GridView: View {
-    let breeds: [DogBreed]
     private let size: CGFloat = 150
+    
+    @ObservedObject var mainViewViewModel: MainViewViewModel
+    @ObservedObject var sortOrderViewModel: SortOrderViewModel
+    let breeds: [DogBreed]
 
     var body: some View {
         ScrollView {
@@ -20,6 +23,11 @@ struct GridView: View {
                 ForEach(breeds, id: \.id) { breed in
                     NavigationLink(destination: DetailsView(breed: breed)) {
                         GridViewCell(breed: breed)
+                            .task {
+                                if mainViewViewModel.shouldLoadNextPage(breed: breed) {
+                                    await mainViewViewModel.loadNextPage(with: sortOrderViewModel.sortOrder)
+                                }
+                            }
                     }
                 }
             }
@@ -29,5 +37,9 @@ struct GridView: View {
 }
 
 #Preview {
-    GridView(breeds: [])
+    GridView(
+        mainViewViewModel: MainViewViewModel(),
+        sortOrderViewModel: SortOrderViewModel(),
+        breeds: []
+    )
 }

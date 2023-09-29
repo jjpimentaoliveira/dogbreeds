@@ -64,12 +64,16 @@ class DogAPIService: DogAPIServiceProtocol {
         }
     }
 
-    func fetchDogBreeds(with order: SortOrder) async throws -> [DogBreed] {
+    func fetchDogBreeds(
+        with order: SortOrder,
+        page: Int
+    ) async throws -> [DogBreed] {
         let endpoint = "/v1/breeds"
         let parameters: [URLQueryItem] = [
-            URLQueryItem(name: "limit", value: "10"),
+            URLQueryItem(name: "limit", value: "20"),
             URLQueryItem(name: "has_breeds", value: "1"),
-            URLQueryItem(name: "order", value: order.rawValue)
+            URLQueryItem(name: "order", value: order.rawValue),
+            URLQueryItem(name: "page", value: "\(page)")
         ]
 
         do {

@@ -24,9 +24,17 @@ struct MainView: View {
                     } else {
                         switch displayMode {
                         case .list:
-                            ListView(breeds: breeds)
+                            ListView(
+                                mainViewViewModel: mainViewViewModel,
+                                sortOrderViewModel: sortOrderViewModel,
+                                breeds: breeds
+                            )
                         case .grid:
-                            GridView(breeds: breeds)
+                            GridView(
+                                mainViewViewModel: mainViewViewModel,
+                                sortOrderViewModel: sortOrderViewModel,
+                                breeds: breeds
+                            )
                         }
                     }
                 case .error(let error):
@@ -35,7 +43,9 @@ struct MainView: View {
             }
             .onAppear {
                 Task {
-                    await mainViewViewModel.fetchDogBreeds(with: sortOrderViewModel.sortOrder)
+                    if mainViewViewModel.sortedBreeds.isEmpty {
+                        await mainViewViewModel.fetchInitialDogBreeds(with: sortOrderViewModel.sortOrder)
+                    }
                 }
             }
             .navigationBarTitle("Dog Breeds", displayMode: .inline)
