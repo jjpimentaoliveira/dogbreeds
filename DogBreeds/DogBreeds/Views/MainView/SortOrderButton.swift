@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SortOrderButton: View {
     @ObservedObject var sortOrderViewModel: SortOrderViewModel
-    @ObservedObject var viewModel: DogBreedsViewModel
+    @ObservedObject var viewModel: MainViewViewModel
 
     var body: some View {
         Button(action: {
@@ -34,6 +34,6 @@ struct SortOrderButton: View {
 #Preview {
     SortOrderButton(
         sortOrderViewModel: SortOrderViewModel(),
-        viewModel: DogBreedsViewModel()
+        viewModel: MainViewViewModel()
     )
 }

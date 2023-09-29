@@ -9,13 +9,13 @@ import SwiftUI
 
 struct MainView: View {
     @State private var displayMode: DisplayMode = .list
-    @ObservedObject var viewModel = DogBreedsViewModel()
+    @ObservedObject var mainViewViewModel = MainViewViewModel()
     @ObservedObject var sortOrderViewModel = SortOrderViewModel()
 
     var body: some View {
         NavigationView {
             ZStack {
-                switch viewModel.fetchState {
+                switch mainViewViewModel.fetchState {
                 case .loading:
                     ProgressView("Fetching Dog Breeds...")
                 case .fetched(let breeds):
@@ -35,7 +35,7 @@ struct MainView: View {
             }
             .onAppear {
                 Task {
-                    await viewModel.fetchDogBreeds(with: sortOrderViewModel.sortOrder)
+                    await mainViewViewModel.fetchDogBreeds(with: sortOrderViewModel.sortOrder)
                 }
             }
             .navigationBarTitle("Dog Breeds", displayMode: .inline)
@@ -45,7 +45,7 @@ struct MainView: View {
                 }
 
                 ToolbarItem(placement: .topBarLeading) {
-                    SortOrderButton(sortOrderViewModel: sortOrderViewModel, viewModel: viewModel)
+                    SortOrderButton(sortOrderViewModel: sortOrderViewModel, viewModel: mainViewViewModel)
                 }
             }
         }

@@ -16,7 +16,7 @@
 		CA237E722AC077B200BF5D16 /* DogBreedsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E712AC077B200BF5D16 /* DogBreedsUITestsLaunchTests.swift */; };
 		CA237E802AC07AC100BF5D16 /* DogBreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E7F2AC07AC100BF5D16 /* DogBreed.swift */; };
 		CA237E832AC07AE100BF5D16 /* DogAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E822AC07AE100BF5D16 /* DogAPIService.swift */; };
-		CA237E862AC07BA400BF5D16 /* DogBreedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E852AC07BA400BF5D16 /* DogBreedViewModel.swift */; };
+		CA237E862AC07BA400BF5D16 /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E852AC07BA400BF5D16 /* MainViewViewModel.swift */; };
 		CA237E882AC085FA00BF5D16 /* MockDogAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E872AC085FA00BF5D16 /* MockDogAPIService.swift */; };
 		CA237E8A2AC0860700BF5D16 /* DogAPIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E892AC0860700BF5D16 /* DogAPIServiceProtocol.swift */; };
 		CA237E8D2AC2396600BF5D16 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA237E8C2AC2396600BF5D16 /* ListView.swift */; };
@@ -68,7 +68,7 @@
 		CA237E712AC077B200BF5D16 /* DogBreedsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CA237E7F2AC07AC100BF5D16 /* DogBreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreed.swift; sourceTree = "<group>"; };
 		CA237E822AC07AE100BF5D16 /* DogAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPIService.swift; sourceTree = "<group>"; };
-		CA237E852AC07BA400BF5D16 /* DogBreedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogBreedViewModel.swift; sourceTree = "<group>"; };
+		CA237E852AC07BA400BF5D16 /* MainViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewViewModel.swift; sourceTree = "<group>"; };
 		CA237E872AC085FA00BF5D16 /* MockDogAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDogAPIService.swift; sourceTree = "<group>"; };
 		CA237E892AC0860700BF5D16 /* DogAPIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPIServiceProtocol.swift; sourceTree = "<group>"; };
 		CA237E8C2AC2396600BF5D16 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 		CA237E842AC07B8F00BF5D16 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				CA237E852AC07BA400BF5D16 /* DogBreedViewModel.swift */,
+				CA237E852AC07BA400BF5D16 /* MainViewViewModel.swift */,
 				CA74935D2AC719EF007F7485 /* SortOrderViewModel.swift */,
 			);
 			path = ViewModels;
@@ -415,7 +415,7 @@
 				CA237E882AC085FA00BF5D16 /* MockDogAPIService.swift in Sources */,
 				CA237E9F2AC3923200BF5D16 /* PlaceholderImageView.swift in Sources */,
 				CA237E8A2AC0860700BF5D16 /* DogAPIServiceProtocol.swift in Sources */,
-				CA237E862AC07BA400BF5D16 /* DogBreedViewModel.swift in Sources */,
+				CA237E862AC07BA400BF5D16 /* MainViewViewModel.swift in Sources */,
 				CA237E802AC07AC100BF5D16 /* DogBreed.swift in Sources */,
 				CA237EA32AC39FA600BF5D16 /* MainViewText.swift in Sources */,
 				CA7493632AC71D5C007F7485 /* DisplayMode.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  DogBreedViewModel.swift
+//  MainViewViewModel.swift
 //  DogBreeds
 //
 //  Created by José João Pimenta Oliveira on 24/09/2023.
@@ -14,7 +14,7 @@ enum FetchState {
 }
 
 @MainActor
-class DogBreedsViewModel: ObservableObject {
+class MainViewViewModel: ObservableObject {
     @Published var fetchState: FetchState = .loading
     var sortedBreeds: [DogBreed] = []
     private let apiService: DogAPIServiceProtocol
