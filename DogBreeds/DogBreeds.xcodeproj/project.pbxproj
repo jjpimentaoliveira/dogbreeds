@@ -135,6 +135,7 @@
 				CA237E812AC07AD100BF5D16 /* Services */,
 				CA237E8B2AC2393600BF5D16 /* Views */,
 				CA237E842AC07B8F00BF5D16 /* ViewModels */,
+				CA74935F2AC71A59007F7485 /* Enums */,
 				CA237E7E2AC07AB000BF5D16 /* Models */,
 				CA237E582AC077B200BF5D16 /* Assets.xcassets */,
 				CA237E5A2AC077B200BF5D16 /* Preview Content */,
@@ -251,6 +252,14 @@
 				CA7493592AC3ACA3007F7485 /* DetailsTextView.swift */,
 			);
 			path = DetailsView;
+			sourceTree = "<group>";
+		};
+		CA74935F2AC71A59007F7485 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				CA7493622AC71D5C007F7485 /* DisplayMode.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

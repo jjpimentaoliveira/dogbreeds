@@ -7,20 +7,6 @@
 
 import SwiftUI
 
-enum DisplayMode {
-    case list
-    case grid
-
-    var icon: String {
-        switch self {
-        case .list:
-            return "square.grid.2x2"
-        case .grid:
-            return "list.dash"
-        }
-    }
-}
-
 struct DisplayModeButton: View {
     @Binding var currentMode: DisplayMode
 
