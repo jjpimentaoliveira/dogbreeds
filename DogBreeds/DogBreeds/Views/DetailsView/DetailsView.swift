@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailsView: View {
+    private let padding: CGFloat = 6.0
     let breed: DogBreed
 
     var body: some View {
@@ -26,10 +27,10 @@ struct DetailsView: View {
                         DetailsTextView(title: "History:", value: breed.history)
                         DetailsTextView(title: "Description:", value: breed.description)
                     }
-                    .frame(width: geometry.size.width)
+                    .frame(width: geometry.size.width - padding)
                 }
                 .scrollIndicators(.never)
-                .padding()
+                .padding(padding)
             }
             .navigationBarTitle(breed.name ?? "Unknown breed", displayMode: .inline)
         }
