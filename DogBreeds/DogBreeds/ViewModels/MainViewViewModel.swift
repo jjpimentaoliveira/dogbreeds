@@ -9,24 +9,54 @@ import SwiftUI
 
 @MainActor
 class MainViewViewModel: ObservableObject {
-    @Published var fetchState: FetchState = .loading
-    var sortedBreeds: [DogBreed] = []
     private let apiService: DogAPIServiceProtocol
+    private var currentPage = 0
+
+    @Published var isLoadingNextPage = false
+    @Published var fetchState: FetchState = .loading
+    @Published var sortedBreeds: [DogBreed] = []
 
     init(apiService: DogAPIServiceProtocol = DogAPIService()) {
         self.apiService = apiService
     }
 
     func fetchInitialDogBreeds(with order: SortOrder) async {
+
+        currentPage = 0
+
         do {
-            fetchState = .loading
-            let breeds = try await apiService.fetchDogBreeds(with: order)
+            let breeds = try await apiService.fetchDogBreeds(with: order, page: currentPage)
             let updatedBreeds = try await updateImageURLs(forBreeds: breeds)
-            sortedBreeds = sortBreeds(updatedBreeds, sortOrder: order)
+            sortedBreeds.append(contentsOf: sortBreeds(updatedBreeds, order: order))
+
             fetchState = .fetched(sortedBreeds)
         } catch {
             fetchState = .error(error)
         }
+    }
+
+    func loadNextPage(with order: SortOrder) async {
+
+        guard isLoadingNextPage == false else { return }
+
+        currentPage += 1
+        isLoadingNextPage = true
+
+        do {
+            let nextPageBreeds = try await apiService.fetchDogBreeds(with: order, page: currentPage)
+            let updatedBreeds = try await updateImageURLs(forBreeds: nextPageBreeds)
+            sortedBreeds.append(contentsOf: sortBreeds(updatedBreeds, order: order))
+
+            fetchState = .fetched(sortedBreeds)
+            isLoadingNextPage = false
+        } catch {
+            currentPage -= 1
+            isLoadingNextPage = false
+        }
+    }
+
+    func shouldLoadNextPage(breed: DogBreed) -> Bool {
+        return sortedBreeds.last?.id == breed.id
     }
 
     private func updateImageURLs(forBreeds breeds: [DogBreed]) async throws -> [DogBreed] {
