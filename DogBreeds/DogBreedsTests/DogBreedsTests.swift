@@ -106,4 +106,30 @@ final class DogBreedsTests: XCTestCase {
             )
         }
     }
+
+    @MainActor func testAscendingSort() {
+        let unsortedBreeds = [
+            DogBreed(id: 1, name: "Golden Retriever"),
+            DogBreed(id: 2, name: "Dachshund"),
+            DogBreed(id: 3, name: "Beagle"),
+            DogBreed(id: 4, name: "Husky"),
+            DogBreed(id: 5, name: "Chihuahua")
+        ]
+
+        let sortedBreeds = viewModel?.sortBreeds(unsortedBreeds, sortOrder: .ascending)
+        XCTAssertEqual(sortedBreeds?.map { $0.name }, ["Beagle", "Chihuahua", "Dachshund", "Golden Retriever", "Husky"])
+    }
+
+    @MainActor func testDescendingSort() {
+        let unsortedBreeds = [
+            DogBreed(id: 1, name: "Golden Retriever"),
+            DogBreed(id: 2, name: "Dachshund"),
+            DogBreed(id: 3, name: "Beagle"),
+            DogBreed(id: 4, name: "Husky"),
+            DogBreed(id: 5, name: "Chihuahua")
+        ]
+
+        let sortedBreeds = viewModel?.sortBreeds(unsortedBreeds, sortOrder: .descending)
+        XCTAssertEqual(sortedBreeds?.map { $0.name }, ["Husky", "Golden Retriever", "Dachshund", "Chihuahua", "Beagle"])
+    }
 }
