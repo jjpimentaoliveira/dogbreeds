@@ -19,7 +19,10 @@ struct SearchView: View {
                     .padding()
                     .textFieldStyle(.roundedBorder)
                     .onChange(of: searchQuery, initial: true) { _, newValue in
-                        searchViewModel.filterBreeds(by: newValue, in: mainViewModel.sortedBreeds)
+                        searchViewModel.filterBreeds(
+                            by: newValue,
+                            in: mainViewModel.sortedBreeds
+                        )
                     }
 
                 List(searchViewModel.filteredBreeds, id: \.id) { breed in

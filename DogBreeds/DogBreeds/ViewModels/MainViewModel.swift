@@ -22,6 +22,8 @@ class MainViewModel: ObservableObject {
 
     func fetchInitialDogBreeds(with order: SortOrder) async {
 
+        print("📃 Fetching first breeds..")
+
         currentPage = 0
 
         do {
@@ -31,6 +33,7 @@ class MainViewModel: ObservableObject {
 
             fetchState = .fetched(sortedBreeds)
         } catch {
+            print("⚠️ Failed to fetch initial breeds. Error: \(error)")
             fetchState = .error(error)
         }
     }
@@ -38,6 +41,8 @@ class MainViewModel: ObservableObject {
     func loadNextPage(with order: SortOrder) async {
 
         guard isLoadingNextPage == false else { return }
+
+        print("📃 Fetching next page...")
 
         currentPage += 1
         isLoadingNextPage = true
@@ -50,6 +55,7 @@ class MainViewModel: ObservableObject {
             fetchState = .fetched(sortedBreeds)
             isLoadingNextPage = false
         } catch {
+            print("⚠️ Failed to load next page. Error: \(error)")
             currentPage -= 1
             isLoadingNextPage = false
         }
@@ -96,6 +102,7 @@ class MainViewModel: ObservableObject {
     }
 
     private func clearBreeds() async {
+        print("Clearing all saved breeds...")
         sortedBreeds.removeAll()
     }
 
@@ -106,9 +113,9 @@ class MainViewModel: ObservableObject {
         return breeds.sorted {
             switch order {
             case .ascending:
-                return $0.name?.caseInsensitiveCompare($1.name ?? "") == .orderedAscending
+                return $0.name.caseInsensitiveCompare($1.name) == .orderedAscending
             case .descending:
-                return $0.name?.caseInsensitiveCompare($1.name ?? "") == .orderedDescending
+                return $0.name.caseInsensitiveCompare($1.name) == .orderedDescending
             }
         }
     }

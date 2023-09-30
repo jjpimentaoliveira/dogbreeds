@@ -32,7 +32,10 @@ struct DetailsView: View {
                 .scrollIndicators(.never)
                 .padding(padding)
             }
-            .navigationBarTitle(breed.name ?? "Unknown breed", displayMode: .inline)
+            .navigationBarTitle(breed.name, displayMode: .inline)
+        }
+        .onAppear {
+            print("🕵🏻‍♂️ Checking \(breed.name) details")
         }
         .navigationViewStyle(.stack)
     }
