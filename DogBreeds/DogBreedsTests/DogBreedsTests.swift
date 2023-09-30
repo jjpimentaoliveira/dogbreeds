@@ -9,11 +9,11 @@ import XCTest
 @testable import DogBreeds
 
 final class DogBreedsTests: XCTestCase {
-    var viewModel: MainViewViewModel?
+    var viewModel: MainViewModel?
 
     @MainActor override func setUp() {
         super.setUp()
-        viewModel = MainViewViewModel(apiService: MockDogAPIService())
+        viewModel = MainViewModel(apiService: MockDogAPIService())
     }
 
     override func tearDown() {
