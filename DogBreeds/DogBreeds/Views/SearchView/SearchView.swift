@@ -32,6 +32,7 @@ struct SearchView: View {
             }
             .navigationBarTitle("Search Breeds", displayMode: .inline)
         }
+        .navigationViewStyle(.stack)
     }
 }
 
