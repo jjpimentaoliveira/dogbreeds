@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SortOrderButton: View {
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var mainViewModel: MainViewModel
     @ObservedObject var sortOrderViewModel: SortOrderViewModel
 
@@ -24,7 +25,7 @@ struct SortOrderButton: View {
             }
         }) {
             Image(systemName: sortOrderViewModel.sortOrder.icon)
-                .foregroundColor(.black)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
                 .padding()
         }
     }
