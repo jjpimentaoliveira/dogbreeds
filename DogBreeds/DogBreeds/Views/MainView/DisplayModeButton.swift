@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DisplayModeButton: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Binding var currentMode: DisplayMode
 
     var body: some View {
@@ -20,7 +21,7 @@ struct DisplayModeButton: View {
             }
         }) {
             Image(systemName: currentMode.icon)
-                .foregroundColor(.black)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
                 .padding()
         }
     }

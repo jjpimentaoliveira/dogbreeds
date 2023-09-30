@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @State private var displayMode: DisplayMode = .list
     @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var sortOrderViewModel: SortOrderViewModel
@@ -18,9 +19,11 @@ struct MainView: View {
                 switch mainViewModel.fetchState {
                 case .loading:
                     ProgressView("Fetching Dog Breeds...")
+                        .foregroundStyle(colorScheme == .dark ? .white : .black)
                 case .fetched(let breeds):
                     if breeds.isEmpty {
                         Text("No Dog Breeds Found")
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                     } else {
                         switch displayMode {
                         case .list:
@@ -39,6 +42,7 @@ struct MainView: View {
                     }
                 case .error(let error):
                     Text("Error: \(error.localizedDescription)")
+                        .foregroundStyle(colorScheme == .dark ? .white : .black)
                 }
             }
             .onAppear {

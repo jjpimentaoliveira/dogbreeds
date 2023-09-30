@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct MainViewText: View {
+    @Environment(\.colorScheme) private var colorScheme
     let breed: DogBreed
     
     var body: some View {
         Text(breed.name)
             .font(.subheadline)
             .multilineTextAlignment(.center)
-            .foregroundStyle(.black)
+            .foregroundStyle(colorScheme == .dark ? .white : .black)
     }
 }
 
