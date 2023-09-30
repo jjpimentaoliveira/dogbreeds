@@ -12,7 +12,7 @@ struct MainViewText: View {
     
     var body: some View {
         Text(breed.name ?? "Unknown breed")
-            .font(.caption)
+            .font(.subheadline)
             .multilineTextAlignment(.center)
             .foregroundStyle(.black)
     }

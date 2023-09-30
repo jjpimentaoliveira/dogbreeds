@@ -34,6 +34,7 @@ struct DetailsView: View {
             }
             .navigationBarTitle(breed.name ?? "Unknown breed", displayMode: .inline)
         }
+        .navigationViewStyle(.stack)
     }
 }
 

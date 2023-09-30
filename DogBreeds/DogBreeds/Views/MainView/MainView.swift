@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     @State private var displayMode: DisplayMode = .list
     @EnvironmentObject var mainViewModel: MainViewModel
-    @ObservedObject var sortOrderViewModel = SortOrderViewModel()
+    @EnvironmentObject var sortOrderViewModel: SortOrderViewModel
 
     var body: some View {
         NavigationView {
@@ -55,10 +55,14 @@ struct MainView: View {
                 }
 
                 ToolbarItem(placement: .topBarLeading) {
-                    SortOrderButton(sortOrderViewModel: sortOrderViewModel, viewModel: mainViewModel)
+                    SortOrderButton(
+                        mainViewModel: mainViewModel,
+                        sortOrderViewModel: sortOrderViewModel
+                    )
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 

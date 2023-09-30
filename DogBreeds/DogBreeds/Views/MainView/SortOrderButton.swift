@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SortOrderButton: View {
+    @ObservedObject var mainViewModel: MainViewModel
     @ObservedObject var sortOrderViewModel: SortOrderViewModel
-    @ObservedObject var viewModel: MainViewModel
 
     var body: some View {
         Button(action: {
@@ -19,9 +19,8 @@ struct SortOrderButton: View {
             case .descending:
                 sortOrderViewModel.sortOrder = .ascending
             }
-
             Task {
-                await viewModel.clearAndFetchBreeds(with: sortOrderViewModel.sortOrder)
+                await mainViewModel.clearAndFetchBreeds(with: sortOrderViewModel.sortOrder)
             }
         }) {
             Image(systemName: sortOrderViewModel.sortOrder.icon)
@@ -33,7 +32,7 @@ struct SortOrderButton: View {
 
 #Preview {
     SortOrderButton(
-        sortOrderViewModel: SortOrderViewModel(),
-        viewModel: MainViewModel()
+        mainViewModel: MainViewModel(), 
+        sortOrderViewModel: SortOrderViewModel()
     )
 }

@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var mainViewModel = MainViewModel()
+    @StateObject private var sortOrderViewModel = SortOrderViewModel()
 
     var body: some View {
         TabView {
             MainView()
                 .environmentObject(mainViewModel)
+                .environmentObject(sortOrderViewModel)
                 .tabItem {
                     Label("List", systemImage: "list.dash")
                 }
