@@ -378,6 +378,9 @@
 				Base,
 			);
 			mainGroup = CA237E482AC077B100BF5D16;
+			packageReferences = (
+				CA67D1762AC8CEBA00BEEB58 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = CA237E522AC077B100BF5D16 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
