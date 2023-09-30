@@ -22,7 +22,9 @@ struct ListView: View {
                         }
                     }
             }
+            .listRowSeparator(.hidden)
         }
+        .listStyle(.plain)
     }
 }
 
