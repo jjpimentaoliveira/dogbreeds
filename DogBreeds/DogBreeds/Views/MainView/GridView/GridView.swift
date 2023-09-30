@@ -10,7 +10,7 @@ import SwiftUI
 struct GridView: View {
     private let size: CGFloat = 150
     
-    @ObservedObject var mainViewViewModel: MainViewViewModel
+    @ObservedObject var mainViewModel: MainViewModel
     @ObservedObject var sortOrderViewModel: SortOrderViewModel
     let breeds: [DogBreed]
 
@@ -24,8 +24,8 @@ struct GridView: View {
                     NavigationLink(destination: DetailsView(breed: breed)) {
                         GridViewCell(breed: breed)
                             .task {
-                                if mainViewViewModel.shouldLoadNextPage(breed: breed) {
-                                    await mainViewViewModel.loadNextPage(with: sortOrderViewModel.sortOrder)
+                                if mainViewModel.shouldLoadNextPage(breed: breed) {
+                                    await mainViewModel.loadNextPage(with: sortOrderViewModel.sortOrder)
                                 }
                             }
                     }
@@ -38,7 +38,7 @@ struct GridView: View {
 
 #Preview {
     GridView(
-        mainViewViewModel: MainViewViewModel(),
+        mainViewModel: MainViewModel(),
         sortOrderViewModel: SortOrderViewModel(),
         breeds: []
     )

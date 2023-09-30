@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListView: View {
-    @ObservedObject var mainViewViewModel: MainViewViewModel
+    @ObservedObject var mainViewModel: MainViewModel
     @ObservedObject var sortOrderViewModel: SortOrderViewModel
     let breeds: [DogBreed]
 
@@ -17,18 +17,20 @@ struct ListView: View {
             NavigationLink(destination: DetailsView(breed: breed)) {
                 ListViewCell(breed: breed)
                     .task {
-                        if mainViewViewModel.shouldLoadNextPage(breed: breed) {
-                            await mainViewViewModel.loadNextPage(with: sortOrderViewModel.sortOrder)
+                        if mainViewModel.shouldLoadNextPage(breed: breed) {
+                            await mainViewModel.loadNextPage(with: sortOrderViewModel.sortOrder)
                         }
                     }
             }
+            .listRowSeparator(.hidden)
         }
+        .listStyle(.plain)
     }
 }
 
 #Preview {
     ListView(
-        mainViewViewModel: MainViewViewModel(),
+        mainViewModel: MainViewModel(),
         sortOrderViewModel: SortOrderViewModel(),
         breeds: []
     )

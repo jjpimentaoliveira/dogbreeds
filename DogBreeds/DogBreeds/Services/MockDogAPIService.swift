@@ -9,7 +9,8 @@ import Foundation
 
 class MockDogAPIService: DogAPIServiceProtocol {
     var responseData: [DogBreed] = []
-    var errorResponse: DogAPIServiceError? = nil
+    var dogBreedFetchError: DogAPIServiceError? = nil
+    var imageFetchError: DogAPIServiceError? = nil
     var didCallFetchDogsBreeds = false
     var didCallFetchBreedImage = false
 
@@ -19,8 +20,8 @@ class MockDogAPIService: DogAPIServiceProtocol {
     ) async throws -> [DogBreed] {
         didCallFetchDogsBreeds = true
 
-        if let errorResponse {
-            throw errorResponse
+        if let dogBreedFetchError {
+            throw dogBreedFetchError
         }
 
         return responseData
@@ -29,8 +30,8 @@ class MockDogAPIService: DogAPIServiceProtocol {
     func fetchBreedImage(for imageID: String) async throws -> URL {
         didCallFetchBreedImage = true
 
-        if let errorResponse {
-            throw errorResponse
+        if let imageFetchError {
+            throw imageFetchError
         }
 
         if

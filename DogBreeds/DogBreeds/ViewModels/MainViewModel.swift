@@ -1,5 +1,5 @@
 //
-//  MainViewViewModel.swift
+//  MainViewModel.swift
 //  DogBreeds
 //
 //  Created by José João Pimenta Oliveira on 24/09/2023.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-class MainViewViewModel: ObservableObject {
+class MainViewModel: ObservableObject {
     private let apiService: DogAPIServiceProtocol
     private var currentPage = 0
 
@@ -69,7 +69,6 @@ class MainViewViewModel: ObservableObject {
                             let updatedBreed = DogBreed(existingBreed: breed, imageURL: imageURL)
                             return updatedBreed
                         } catch {
-                            print("Error: \(error.localizedDescription) while fetching breed: \(breed.id) imageURL")
                             return breed
                         }
                     }

@@ -9,13 +9,13 @@ import SwiftUI
 
 struct MainView: View {
     @State private var displayMode: DisplayMode = .list
-    @ObservedObject var mainViewViewModel = MainViewViewModel()
+    @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject var sortOrderViewModel = SortOrderViewModel()
 
     var body: some View {
         NavigationView {
             ZStack {
-                switch mainViewViewModel.fetchState {
+                switch mainViewModel.fetchState {
                 case .loading:
                     ProgressView("Fetching Dog Breeds...")
                 case .fetched(let breeds):
@@ -25,13 +25,13 @@ struct MainView: View {
                         switch displayMode {
                         case .list:
                             ListView(
-                                mainViewViewModel: mainViewViewModel,
+                                mainViewModel: mainViewModel,
                                 sortOrderViewModel: sortOrderViewModel,
                                 breeds: breeds
                             )
                         case .grid:
                             GridView(
-                                mainViewViewModel: mainViewViewModel,
+                                mainViewModel: mainViewModel,
                                 sortOrderViewModel: sortOrderViewModel,
                                 breeds: breeds
                             )
@@ -43,8 +43,8 @@ struct MainView: View {
             }
             .onAppear {
                 Task {
-                    if mainViewViewModel.sortedBreeds.isEmpty {
-                        await mainViewViewModel.fetchInitialDogBreeds(with: sortOrderViewModel.sortOrder)
+                    if mainViewModel.sortedBreeds.isEmpty {
+                        await mainViewModel.fetchInitialDogBreeds(with: sortOrderViewModel.sortOrder)
                     }
                 }
             }
@@ -55,7 +55,7 @@ struct MainView: View {
                 }
 
                 ToolbarItem(placement: .topBarLeading) {
-                    SortOrderButton(sortOrderViewModel: sortOrderViewModel, viewModel: mainViewViewModel)
+                    SortOrderButton(sortOrderViewModel: sortOrderViewModel, viewModel: mainViewModel)
                 }
             }
         }

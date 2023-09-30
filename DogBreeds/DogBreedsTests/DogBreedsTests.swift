@@ -9,37 +9,38 @@ import XCTest
 @testable import DogBreeds
 
 final class DogBreedsTests: XCTestCase {
-    var viewModel: MainViewViewModel?
+    var mainViewModel: MainViewModel?
+    var mockService: MockDogAPIService = MockDogAPIService()
+    var searchViewModel: SearchViewModel?
 
     @MainActor override func setUp() {
         super.setUp()
-        viewModel = MainViewViewModel(apiService: MockDogAPIService())
+        mainViewModel = MainViewModel(apiService: mockService)
+        searchViewModel = SearchViewModel()
     }
 
     override func tearDown() {
-        viewModel = nil
+        mainViewModel = nil
+        searchViewModel = nil
         super.tearDown()
     }
 
-    @MainActor func testShouldLoadNextPage() {
-        guard let viewModel else {
+    @MainActor func testFetch_ShouldLoadNextPage() {
+        guard let mainViewModel else {
             XCTFail()
             return
         }
 
-        viewModel.sortedBreeds = [DogBreed(id: 1), DogBreed(id: 2), DogBreed(id: 3)]
+        mainViewModel.sortedBreeds = [DogBreed(id: 1), DogBreed(id: 2), DogBreed(id: 3)]
 
         let breedToTriggerLoad = DogBreed(id: 3)
-        XCTAssertTrue(viewModel.shouldLoadNextPage(breed: breedToTriggerLoad))
+        XCTAssertTrue(mainViewModel.shouldLoadNextPage(breed: breedToTriggerLoad))
 
         let breedToNotTriggerLoad = DogBreed(id: 2)
-        XCTAssertFalse(viewModel.shouldLoadNextPage(breed: breedToNotTriggerLoad))
+        XCTAssertFalse(mainViewModel.shouldLoadNextPage(breed: breedToNotTriggerLoad))
     }
 
-    func testFetchDogBreedsSuccess() {
-
-        let mockService = MockDogAPIService()
-
+    func testFetch_Success() {
         let responseData: [DogBreed] = [
             DogBreed(id: 1, name: "Husky"),
             DogBreed(id: 2, name: "Chihuahua")
@@ -48,10 +49,10 @@ final class DogBreedsTests: XCTestCase {
         mockService.responseData = responseData
 
         Task {
-            await viewModel?.fetchInitialDogBreeds(with: .ascending)
+            await mainViewModel?.fetchInitialDogBreeds(with: .ascending)
             XCTAssertTrue(mockService.didCallFetchDogsBreeds)
 
-            if case .fetched(let breeds) = await viewModel?.fetchState {
+            if case .fetched(let breeds) = await mainViewModel?.fetchState {
                 XCTAssertEqual(breeds, responseData)
             } else {
                 XCTFail("Expected .fetched state")
@@ -59,12 +60,11 @@ final class DogBreedsTests: XCTestCase {
         }
     }
 
-    func testResponseParsing() async {
-        let service = MockDogAPIService()
-        service.responseData = [DogBreed(id: 1, name: "Husky")]
+    func testParsing_Success() async {
+        mockService.responseData = [DogBreed(id: 1, name: "Husky")]
 
         do {
-            let breeds = try await service.fetchDogBreeds(with: .ascending, page: 0)
+            let breeds = try await mockService.fetchDogBreeds(with: .ascending, page: 0)
             XCTAssertEqual(breeds.count, 1)
             XCTAssertEqual(breeds[0].id, 1)
             XCTAssertEqual(breeds[0].name, "Husky")
@@ -73,16 +73,15 @@ final class DogBreedsTests: XCTestCase {
         }
     }
 
-    func testFetchDogBreedsFailure() {
-        let mockService = MockDogAPIService()
-        mockService.errorResponse = .invalidResponse
+    func testFetch_Failure() {
+        mockService.dogBreedFetchError = .invalidResponse
 
         Task {
-            await viewModel?.fetchInitialDogBreeds(with: .ascending)
+            await mainViewModel?.fetchInitialDogBreeds(with: .ascending)
 
             XCTAssertTrue(mockService.didCallFetchDogsBreeds)
 
-            if case .error(let error) = await viewModel?.fetchState {
+            if case .error(let error) = await mainViewModel?.fetchState {
                 XCTAssertEqual(
                     error.localizedDescription,
                     DogAPIServiceError.invalidResponse.localizedDescription
@@ -93,35 +92,38 @@ final class DogBreedsTests: XCTestCase {
         }
     }
 
-    func testFetchBreedImageSuccess() async {
-        let service = MockDogAPIService()
-        service.responseData = [DogBreed(id: 1, name: "Husky")]
+    func testImageFetch_Success() async {
+        mockService.responseData = [DogBreed(id: 1, name: "Husky")]
 
         do {
-            let imageURL = try await service.fetchBreedImage(for: "1")
+            let imageURL = try await mockService.fetchBreedImage(for: "1")
             XCTAssertEqual(imageURL, URL(string: "https://api.thedogapi.com/v1/images/1"))
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
     }
 
-    func testFetchBreedImageError() async {
-        let service = MockDogAPIService()
-        service.errorResponse = DogAPIServiceError.invalidResponse
+    func testImageFetch_Failure() async {
+        mockService.dogBreedFetchError = nil
+        mockService.imageFetchError = .invalidURL
 
-        do {
-            _ = try await service.fetchBreedImage(for: "1")
-            XCTFail("Expected an error but received success")
-        } catch {
-            XCTAssertTrue(error is DogAPIServiceError)
-            XCTAssertEqual(
-                error.localizedDescription,
-                DogAPIServiceError.invalidResponse.localizedDescription
-            )
+        Task {
+            await mainViewModel?.fetchInitialDogBreeds(with: .ascending)
+
+            XCTAssertTrue(mockService.didCallFetchBreedImage)
+
+            if case .error(let error) = await mainViewModel?.fetchState {
+                XCTAssertEqual(
+                    error.localizedDescription,
+                    DogAPIServiceError.invalidURL.localizedDescription
+                )
+            } else {
+                XCTFail("Expected .error state")
+            }
         }
     }
 
-    @MainActor func testAscendingSort() {
+    @MainActor func testSort_Ascending() {
         let unsortedBreeds = [
             DogBreed(id: 1, name: "Golden Retriever"),
             DogBreed(id: 2, name: "Dachshund"),
@@ -130,11 +132,11 @@ final class DogBreedsTests: XCTestCase {
             DogBreed(id: 5, name: "Chihuahua")
         ]
 
-        let sortedBreeds = viewModel?.sortBreeds(unsortedBreeds, order: .ascending)
+        let sortedBreeds = mainViewModel?.sortBreeds(unsortedBreeds, order: .ascending)
         XCTAssertEqual(sortedBreeds?.map { $0.name }, ["Beagle", "Chihuahua", "Dachshund", "Golden Retriever", "Husky"])
     }
 
-    @MainActor func testDescendingSort() {
+    @MainActor func testSort_Descending() {
         let unsortedBreeds = [
             DogBreed(id: 1, name: "Golden Retriever"),
             DogBreed(id: 2, name: "Dachshund"),
@@ -143,7 +145,43 @@ final class DogBreedsTests: XCTestCase {
             DogBreed(id: 5, name: "Chihuahua")
         ]
 
-        let sortedBreeds = viewModel?.sortBreeds(unsortedBreeds, order: .descending)
+        let sortedBreeds = mainViewModel?.sortBreeds(unsortedBreeds, order: .descending)
         XCTAssertEqual(sortedBreeds?.map { $0.name }, ["Husky", "Golden Retriever", "Dachshund", "Chihuahua", "Beagle"])
+    }
+
+    func testFilter_EmptyQuery() {
+        let breeds = [
+            DogBreed(id: 1, name: "Golden Retriever"),
+            DogBreed(id: 2, name: "Dachshund"),
+            DogBreed(id: 3, name: "Beagle"),
+            DogBreed(id: 4, name: "Husky"),
+            DogBreed(id: 5, name: "Chihuahua")
+        ]
+        searchViewModel?.filterBreeds(by: "", in: breeds)
+        XCTAssertEqual(searchViewModel?.filteredBreeds.count, breeds.count)
+    }
+
+    func testFilter_MatchingQuery() {
+        let breeds = [
+            DogBreed(id: 1, name: "Golden Retriever"),
+            DogBreed(id: 2, name: "Dachshund"),
+            DogBreed(id: 3, name: "Beagle"),
+            DogBreed(id: 4, name: "Husky"),
+            DogBreed(id: 5, name: "Chihuahua")
+        ]
+        searchViewModel?.filterBreeds(by: "Golden", in: breeds)
+        XCTAssertEqual(searchViewModel?.filteredBreeds.count ?? 0, 1)
+    }
+
+    func testFilter_NoMatchingQuery() {
+        let breeds = [
+            DogBreed(id: 1, name: "Golden Retriever"),
+            DogBreed(id: 2, name: "Dachshund"),
+            DogBreed(id: 3, name: "Beagle"),
+            DogBreed(id: 4, name: "Husky"),
+            DogBreed(id: 5, name: "Chihuahua")
+        ]
+        searchViewModel?.filterBreeds(by: "Pitbull", in: breeds)
+        XCTAssertEqual(searchViewModel?.filteredBreeds.count, 0)
     }
 }
