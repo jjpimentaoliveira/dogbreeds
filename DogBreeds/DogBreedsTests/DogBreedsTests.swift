@@ -31,7 +31,11 @@ final class DogBreedsTests: XCTestCase {
             return
         }
 
-        mainViewModel.sortedBreeds = [DogBreed(id: 1), DogBreed(id: 2), DogBreed(id: 3)]
+        mainViewModel.sortedBreeds = [
+            DogBreed(id: 1),
+            DogBreed(id: 2),
+            DogBreed(id: 3)
+        ]
 
         let breedToTriggerLoad = DogBreed(id: 3)
         XCTAssertTrue(mainViewModel.shouldLoadNextPage(breed: breedToTriggerLoad))
@@ -42,14 +46,21 @@ final class DogBreedsTests: XCTestCase {
 
     func testFetch_Success() {
         let responseData: [DogBreed] = [
-            DogBreed(id: 1, name: "Husky"),
-            DogBreed(id: 2, name: "Chihuahua")
+            DogBreed(
+                id: 1,
+                name: "Husky"
+            ),
+            DogBreed(
+                id: 2,
+                name: "Chihuahua"
+            )
         ]
 
         mockService.responseData = responseData
 
         Task {
             await mainViewModel?.fetchInitialDogBreeds(with: .ascending)
+
             XCTAssertTrue(mockService.didCallFetchDogsBreeds)
 
             if case .fetched(let breeds) = await mainViewModel?.fetchState {
@@ -61,10 +72,19 @@ final class DogBreedsTests: XCTestCase {
     }
 
     func testParsing_Success() async {
-        mockService.responseData = [DogBreed(id: 1, name: "Husky")]
+        mockService.responseData = [
+            DogBreed(
+                id: 1,
+                name: "Husky"
+            )
+        ]
 
         do {
-            let breeds = try await mockService.fetchDogBreeds(with: .ascending, page: 0)
+            let breeds = try await mockService.fetchDogBreeds(
+                with: .ascending,
+                page: 0
+            )
+
             XCTAssertEqual(breeds.count, 1)
             XCTAssertEqual(breeds[0].id, 1)
             XCTAssertEqual(breeds[0].name, "Husky")
@@ -93,7 +113,12 @@ final class DogBreedsTests: XCTestCase {
     }
 
     func testImageFetch_Success() async {
-        mockService.responseData = [DogBreed(id: 1, name: "Husky")]
+        mockService.responseData = [
+            DogBreed(
+                id: 1,
+                name: "Husky"
+            )
+        ]
 
         do {
             let imageURL = try await mockService.fetchBreedImage(for: "1")

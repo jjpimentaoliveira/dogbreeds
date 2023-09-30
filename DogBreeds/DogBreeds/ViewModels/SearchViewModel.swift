@@ -19,7 +19,7 @@ class SearchViewModel: ObservableObject {
         } else {
             print("Search query: \(query)")
             filteredBreeds = breeds.filter { breed in
-                return breed.name?.range(of: query, options: .caseInsensitive) != nil
+                return breed.name.range(of: query, options: .caseInsensitive) != nil
             }
         }
     }

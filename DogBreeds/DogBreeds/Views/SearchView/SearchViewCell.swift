@@ -12,7 +12,7 @@ struct SearchViewCell: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(breed.name ?? "")
+            Text(breed.name)
                 .font(.headline)
 
             if let breedGroup = breed.breedGroup, !breedGroup.isEmpty {
@@ -35,7 +35,6 @@ struct SearchViewCell: View {
         id: 1,
         breedGroup: "Breed group",
         name: "Test",
-        origin: "Origin",
-        temperament: "Temperament #1, temperament #2, temperament #3"
+        origin: "Origin"
     ))
 }

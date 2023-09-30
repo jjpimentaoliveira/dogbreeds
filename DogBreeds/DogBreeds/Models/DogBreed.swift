@@ -17,7 +17,7 @@ struct DogBreed: Codable, Equatable {
     let history: String?
     var imageURL: URL?
     let lifeSpan: String?
-    let name: String?
+    let name: String
     let origin: String?
     let referenceImageID: String?
     let temperament: String?
@@ -49,7 +49,7 @@ struct DogBreed: Codable, Equatable {
         history: String? = nil,
         imageURL: URL? = nil,
         lifeSpan: String? = nil,
-        name: String? = nil,
+        name: String = "Unknown breed",
         origin: String? = nil,
         referenceImageID: String? = nil,
         temperament: String? = nil,

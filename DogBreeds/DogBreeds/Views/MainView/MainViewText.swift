@@ -11,7 +11,7 @@ struct MainViewText: View {
     let breed: DogBreed
     
     var body: some View {
-        Text(breed.name ?? "Unknown breed")
+        Text(breed.name)
             .font(.subheadline)
             .multilineTextAlignment(.center)
             .foregroundStyle(.black)

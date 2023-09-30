@@ -26,7 +26,10 @@ class DogAPIService: DogAPIServiceProtocol {
 
         guard let baseURL else { throw DogAPIServiceError.invalidURL }
 
-        var components = URLComponents(url: baseURL.appendingPathComponent(endpoint), resolvingAgainstBaseURL: true)
+        var components = URLComponents(
+            url: baseURL.appendingPathComponent(endpoint),
+            resolvingAgainstBaseURL: true
+        )
         components?.queryItems = parameters
 
         // Check if URL is valid
@@ -35,9 +38,13 @@ class DogAPIService: DogAPIServiceProtocol {
         }
 
         var request = URLRequest(url: url)
-        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.setValue(
+            apiKey,
+            forHTTPHeaderField: "x-api-key"
+        )
 
         do {
+            print("[Request] \(request)")
             let (data, response) = try await URLSession.shared.data(for: request)
 
             // Check if we can successfully convert the response from URLResponse? into HTTPURLResponse
@@ -77,7 +84,10 @@ class DogAPIService: DogAPIServiceProtocol {
         ]
 
         do {
-             let breeds: [DogBreed] = try await makeRequest(endpoint: endpoint, parameters: parameters)
+             let breeds: [DogBreed] = try await makeRequest(
+                endpoint: endpoint,
+                parameters: parameters
+             )
              return breeds
          } catch {
              throw error
