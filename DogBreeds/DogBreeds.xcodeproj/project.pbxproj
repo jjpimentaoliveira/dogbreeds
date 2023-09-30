@@ -237,8 +237,8 @@
 		CA7493532AC3A413007F7485 /* ListView */ = {
 			isa = PBXGroup;
 			children = (
-				CA237E942AC2FB0600BF5D16 /* ListViewCell.swift */,
 				CA237E8C2AC2396600BF5D16 /* ListView.swift */,
+				CA237E942AC2FB0600BF5D16 /* ListViewCell.swift */,
 			);
 			path = ListView;
 			sourceTree = "<group>";
@@ -246,8 +246,8 @@
 		CA7493542AC3A42A007F7485 /* GridView */ = {
 			isa = PBXGroup;
 			children = (
-				CA237E9C2AC351CC00BF5D16 /* GridViewCell.swift */,
 				CA237E9A2AC3517100BF5D16 /* GridView.swift */,
+				CA237E9C2AC351CC00BF5D16 /* GridViewCell.swift */,
 			);
 			path = GridView;
 			sourceTree = "<group>";
@@ -272,9 +272,9 @@
 		CA74935F2AC71A59007F7485 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				CA7493602AC71A6E007F7485 /* SortOrder.swift */,
 				CA7493622AC71D5C007F7485 /* DisplayMode.swift */,
 				CA7493642AC73A0B007F7485 /* FetchState.swift */,
+				CA7493602AC71A6E007F7485 /* SortOrder.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
