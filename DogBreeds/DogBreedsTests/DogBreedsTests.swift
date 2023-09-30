@@ -10,10 +10,11 @@ import XCTest
 
 final class DogBreedsTests: XCTestCase {
     var viewModel: MainViewModel?
+    var mockService: MockDogAPIService = MockDogAPIService()
 
     @MainActor override func setUp() {
         super.setUp()
-        viewModel = MainViewModel(apiService: MockDogAPIService())
+        viewModel = MainViewModel(apiService: mockService)
     }
 
     override func tearDown() {
@@ -37,9 +38,6 @@ final class DogBreedsTests: XCTestCase {
     }
 
     func testFetchDogBreedsSuccess() {
-
-        let mockService = MockDogAPIService()
-
         let responseData: [DogBreed] = [
             DogBreed(id: 1, name: "Husky"),
             DogBreed(id: 2, name: "Chihuahua")
@@ -60,11 +58,10 @@ final class DogBreedsTests: XCTestCase {
     }
 
     func testResponseParsing() async {
-        let service = MockDogAPIService()
-        service.responseData = [DogBreed(id: 1, name: "Husky")]
+        mockService.responseData = [DogBreed(id: 1, name: "Husky")]
 
         do {
-            let breeds = try await service.fetchDogBreeds(with: .ascending, page: 0)
+            let breeds = try await mockService.fetchDogBreeds(with: .ascending, page: 0)
             XCTAssertEqual(breeds.count, 1)
             XCTAssertEqual(breeds[0].id, 1)
             XCTAssertEqual(breeds[0].name, "Husky")
@@ -74,7 +71,6 @@ final class DogBreedsTests: XCTestCase {
     }
 
     func testFetchDogBreedsFailure() {
-        let mockService = MockDogAPIService()
         mockService.errorResponse = .invalidResponse
 
         Task {
@@ -94,11 +90,10 @@ final class DogBreedsTests: XCTestCase {
     }
 
     func testFetchBreedImageSuccess() async {
-        let service = MockDogAPIService()
-        service.responseData = [DogBreed(id: 1, name: "Husky")]
+        mockService.responseData = [DogBreed(id: 1, name: "Husky")]
 
         do {
-            let imageURL = try await service.fetchBreedImage(for: "1")
+            let imageURL = try await mockService.fetchBreedImage(for: "1")
             XCTAssertEqual(imageURL, URL(string: "https://api.thedogapi.com/v1/images/1"))
         } catch {
             XCTFail("Unexpected error: \(error)")
@@ -106,11 +101,10 @@ final class DogBreedsTests: XCTestCase {
     }
 
     func testFetchBreedImageError() async {
-        let service = MockDogAPIService()
-        service.errorResponse = DogAPIServiceError.invalidResponse
+        mockService.errorResponse = DogAPIServiceError.invalidResponse
 
         do {
-            _ = try await service.fetchBreedImage(for: "1")
+            _ = try await mockService.fetchBreedImage(for: "1")
             XCTFail("Expected an error but received success")
         } catch {
             XCTAssertTrue(error is DogAPIServiceError)
