@@ -37,6 +37,7 @@
 		CA7493612AC71A6E007F7485 /* SortOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7493602AC71A6E007F7485 /* SortOrder.swift */; };
 		CA7493632AC71D5C007F7485 /* DisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7493622AC71D5C007F7485 /* DisplayMode.swift */; };
 		CA7493652AC73A0B007F7485 /* FetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7493642AC73A0B007F7485 /* FetchState.swift */; };
+		CA98D9382AC82EF900C351A5 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA98D9372AC82EF900C351A5 /* SearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		CA7493602AC71A6E007F7485 /* SortOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOrder.swift; sourceTree = "<group>"; };
 		CA7493622AC71D5C007F7485 /* DisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMode.swift; sourceTree = "<group>"; };
 		CA7493642AC73A0B007F7485 /* FetchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchState.swift; sourceTree = "<group>"; };
+		CA98D9372AC82EF900C351A5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				CA237E852AC07BA400BF5D16 /* MainViewModel.swift */,
+				CA98D9372AC82EF900C351A5 /* SearchViewModel.swift */,
 				CA74935D2AC719EF007F7485 /* SortOrderViewModel.swift */,
 			);
 			path = ViewModels;
@@ -429,6 +432,7 @@
 				CA7493652AC73A0B007F7485 /* FetchState.swift in Sources */,
 				CA237E832AC07AE100BF5D16 /* DogAPIService.swift in Sources */,
 				CA237E552AC077B100BF5D16 /* DogBreedsApp.swift in Sources */,
+				CA98D9382AC82EF900C351A5 /* SearchViewModel.swift in Sources */,
 				CA237E952AC2FB0600BF5D16 /* ListViewCell.swift in Sources */,
 				CA237EA12AC39F3F00BF5D16 /* MainViewImageView.swift in Sources */,
 			);
