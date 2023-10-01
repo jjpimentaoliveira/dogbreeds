@@ -2,7 +2,7 @@
 
 ![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-5.0-blue.svg)
-![License](https://img.shields.io/github/license/jjpimentaoliveira/dogbreeds)
+![License](https://img.shields.io/github/license/jjpimentaoliveira/dogbreeds?refresh=1)
 
 ## Overview
 
@@ -54,4 +54,3 @@ https://github.com/jjpimentaoliveira/dogbreeds/assets/121266882/3f47de0c-740b-4c
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
